@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+#login-container {
+	font-family: 'Roboto', sans-serif;
+	background-color: #f0f5f9;
+	height: 105%;
+	position: relative;
+	top: -30px;
+	margin: 0px;
+}
+.error {
+	color: red;
+	padding-top: 10px;
+}
+
+.main-section {
+	margin: 0 auto;
+	padding-top: 130px;
+}
+.modal-content {
+	background-color: #1e2022;
+	margin-left: auto; margin-right: auto;
+	width: 400px;
+	opacity: .8;
+	padding: 0 18px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 0px 14px 3px #000000;
+	-moz-box-shadow: 0px 0px 14px 3px #000000;
+    box-shadow: 0px 0px 14px 3px #000000;
+}
+.logo-img img {
+	height: 140px;
+	width: 140px;
+}
+.logo-img {
+	margin-top: -70px;
+	margin-bottom: 40px;
+}
+.login-form-group {
+	margin-bottom: 25px;
+}
+.login-form-group input {
+	height: 42px;
+
+	font-size: 18px;
+	padding-left: 50px;
+	background-color:white;
+}
+
+.form-input button {
+	width: 40%;
+	margin: 5px 0 20px;
+}
+.btn{
+    background-color: #1e2022;
+    font-size: 15px;
+    border-color: #52616b;
+    border-radius: 5px;
+    width: 200px;
+}
+.btn-reg{
+    background-color: #f0f5f9;
+    font-size: 15px;
+    border-color: #52616b;
+    border-radius: 5px;
+    width: 200px;
+}
+.btn:hover{
+    background-color: #52616b;
+    border-color: #13361d;
+}
+.register {
+	padding-bottom: 30px;
+    color: #f0f5f9;
+}
+.register a {
+	color: #f0f5f9;
+}
