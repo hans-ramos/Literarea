@@ -52,21 +52,22 @@
 				<div class="col-12 logo-img">
 					<img src="img/llogo.png">
 				</div>
-				<form id="login" name="login">
+                {{#if error}}
+                    <div class="text-danger">{{error}}</div>
+                {{/if}}
+				<form id="login" name="login_form" method="post" action="login_form">
 					<div class="col-12 form-input">
 						<div class="login-form-group">
 							<input type="text" class="form-control" placeholder="Username" id="username" name="username">
 						</div>
-
 						<div class="login-form-group">
 							<input type="password" class="form-control" placeholder="Password" id="password" name="password">
 						</div>
-
-						<button type="button" class="btn-reg" id="login-btn">Login</button>
+						<button type="submit" class="btn-reg" id="login-btn">Login</button>
 					</div>
 				</form>
 				<div class="col-12 register">
-					New to Literarea? <a href=""> Register here </a>
+					New to Literarea? <a href="/register"> Register here </a>
 				</div>
 			</div>
 		</div>

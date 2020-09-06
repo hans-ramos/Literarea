@@ -1,0 +1,11 @@
+.prompt-contents-form, .story-contents-form{
+    margin: 25px;
+}
+
+.commentsDiv, .reviewsDiv{
+    margin: 10px;
+}
+
+.cmtBlock{
+    background-color: aqua;
+}
