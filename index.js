@@ -199,6 +199,17 @@ app.get("/read_prompt",(req,res)=>{
     }
 })
 
+app.get("/edit_profile", (req,res)=>{
+    if(!req.session.username){
+        res.redirect("/login")
+    }
+    else{
+        res.render("edit_profile.hbs",{
+            username:req.session.username
+        })
+    }
+})
+
 app.get("/signout",(req,res)=>{
     req.session.destroy()
     res.redirect("/")
