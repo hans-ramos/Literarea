@@ -62,7 +62,6 @@
                 </div>
             </div>
         </nav>
-{{#with my_profile}}
 <div>
     <div class="px-3 py-2">
         <div class="card float-left" id="user-info" style="width: 30%; margin: 0 auto">
@@ -71,11 +70,11 @@
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Username:</strong>&nbsp;</span><span class="float-right info-field"> {{username}} </span></li>
+                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Username:</strong>&nbsp;</span><span class="float-right info-field"> {{my_profile.username}} </span></li>
 
-                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{intro}} </span></li>
+                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{my_profile.intro}} </span></li>
 
-                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{bio}} </span></li>
+                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{my_profile.bio}} </span></li>
                     <form method="get" action="/user/edit_profile" class="col">
                         <div>
                             <button type="submit" class="btn btn-primary" style="margin: 20px;background-color: #1e2022;" id=""> 
@@ -170,7 +169,6 @@
                 </div>
             </div> 
     </div>
-    {{/with}}
 </div>
     </body>
 </html>

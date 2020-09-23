@@ -119,14 +119,16 @@ router.get("/userprofile", (req,res)=>{
         res.redirect("/login")
     }
     else{
-        var stories = Story.find({author:req.session.username})
-        var prompts = Prompt.find({author:req.session.username})
-        User.findOne({username:req.session.username}).then((doc)=>{
-            res.render("userprofile.hbs",{
-                username:req.session.username,
-                stories:stories,
-                prompts:prompts,
-                my_profile:doc
+            Story.find({author:req.session.username}).then((stories)=>{
+                Prompt.find({author:req.session.username}).then((prompts)=>{
+                    User.findOne({username:req.session.username}).then((user)=>{
+                    res.render("userprofile.hbs",{
+                        username:req.session.username,
+                        stories:stories,
+                        prompts:prompts,
+                        my_profile:user
+                    })
+                })
             })
         })
     }
