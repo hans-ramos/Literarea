@@ -8,9 +8,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="../css/Header-Dark.css">
-        <link rel="stylesheet" href="../css/Navigation-Clean.css">
-        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../../css/Header-Dark.css">
+        <link rel="stylesheet" href="../../css/Navigation-Clean.css">
+        <link rel="stylesheet" href="../../css/styles.css">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
@@ -19,107 +19,98 @@
         <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="icon" href="../img/llogo.png">
+        <link rel="icon" href="../../img/llogo.png">
         
         <!-- Other CSS Files -->
-        <link rel="stylesheet" type="text/css" href="../css/read-stories-prompts.css">
+        <link rel="stylesheet" type="text/css" href="../../css/read-stories-prompts.css">
     </head>
     
 	<body>
-        <title> {prompt name} </title>
+        {{#with prompt}}
+        <title> {{prompt}} </title>
+        {{/with}}
         
         <!-- navigation bar -->
         <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
             <div class="container-fluid">
-                <a href="/home"><img style="width: 70px;height: 70px;margin: 0px;" src="img/llogo.png">
-                <a class="navbar-brand" href="/home" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a>
+                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
+                <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/" style="color: rgb(255,255,255);"> Home </a>
-                        </li>
                         {{#if username}}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
-                        </li>
-                        {{/if}}
-                        {{#if username}}
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/collection" style="color: rgb(255,255,255);padding: 8px 18px;"> My Collection </a>
-                        </li>
-                        {{/if}}
-                        {{#if username}}
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
+                            <a class="nav-link" href="/user/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
                         </li>
                         {{/if}}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/view_stories" style="color: rgb(255,255,255);"> Stories </a>
+                            <a class="nav-link" href="/story/view_stories" style="color: rgb(255,255,255);"> Stories </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
+                            <a class="nav-link" href="/prompt/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
                         </li>
                         {{#if username}}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/signout" style="color: rgb(255,255,255);padding: 8px 18px;"> Signout </a>
+                            <a class="nav-link" href="/user/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
                         </li>
                         {{/if}}
                         {{#unless username}}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/register" style="color: rgb(255,255,255);"> Register </a>
+                            <a class="nav-link" href="/user/register" style="color: rgb(255,255,255);"> Register </a>
                         </li>
                         {{/unless}}
                         {{#unless username}}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
+                            <a class="nav-link" href="/user/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
                         </li>
                         {{/unless}}
                     </ul>
                 </div>
             </div>
         </nav>
+        {{#with prompt}}
+        <div class="content">
+            <div class="prompt-contents-form">
+                <form>
+                    <div class="form-group">
+                        <label for="promptContent"><h5>{{prompt}}</h5><h6>{{author}} | {{genre}} | {{likes}}</h6></label>
+                    </div>
+                </form>
+            </div>
 
-        <div class="prompt-contents-form">
-            <form>
-                <div class="form-group">
-                  <label for="promptContent"><h5>{title of prompt}</h5><h6>{user author} | {genre} | {#}</h6></label>
-                  <textarea class="form-control" id="promptContent"  readonly>{Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ipsum ab atque eaque perferendis quisquam explicabo aperiam tempore molestias unde! Nobis quibusdam voluptatem?}</textarea>
-                </div>
-              </form>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <div class="commentsDiv">
-                        <h5>Comments</h5>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="commentsDiv">
+                            <h5>Comments</h5>
+                            {{#if username}}
+                            <form> <!-- post comment -->
+                                <div class="form-group">
+                                    <label for="storyComment">Post a comment:</label>
+                                    <textarea class="form-control" id="storyComment" rows="3"></textarea>
+                                </div>
+                                    <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
+                            </form>
+                            {{/if}}
+                            <br>
 
-                        <form> <!-- post comment -->
-                            <div class="form-group">
-                                <label for="storyComment">Post a comment:</label>
-                                <textarea class="form-control" id="storyComment" rows="3"></textarea>
-                            </div>
-                                <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
-                        </form>
-
-                        <br>
-
-                        <!-- posted comments -->
-                        <table class="table table-striped" id="commentsTable">
-                            <tr class="username">
-                                <td><h6>{username1}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia tenetur ipsa eveniet molestiae beatae. Quibusdam nostrum nesciunt mollitia accusamus, quis error molestiae voluptatibus nihil accusantium ipsam odit doloremque quod illo!}</td>
-                            </tr>
-                            <tr class="username">
-                                <td><h6>{username2}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus rerum neque dignissimos eum incidunt dolorum sit ullam. Minima, officiis corporis! Eaque est id aliquam vitae beatae iure nulla distinctio assumenda?}</td>
-                            </tr>
-                            <tr class="username">
-                                <td><h6>{username3}</h6>{Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quibusdam? In id, cumque facilis temporibus voluptas delectus itaque quasi, officiis debitis voluptate sed eaque laborum, consectetur molestias similique iure velit.}</td>
-                            </tr>
-                        </table>
+                            <!-- posted comments -->
+                            <table class="table table-striped" id="commentsTable">
+                                <tr class="username">
+                                    <td><h6>{username1}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia tenetur ipsa eveniet molestiae beatae. Quibusdam nostrum nesciunt mollitia accusamus, quis error molestiae voluptatibus nihil accusantium ipsam odit doloremque quod illo!}</td>
+                                </tr>
+                                <tr class="username">
+                                    <td><h6>{username2}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus rerum neque dignissimos eum incidunt dolorum sit ullam. Minima, officiis corporis! Eaque est id aliquam vitae beatae iure nulla distinctio assumenda?}</td>
+                                </tr>
+                                <tr class="username">
+                                    <td><h6>{username3}</h6>{Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quibusdam? In id, cumque facilis temporibus voluptas delectus itaque quasi, officiis debitis voluptate sed eaque laborum, consectetur molestias similique iure velit.}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        {{/with}}
         <script> // for auto adjust textarea | https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
             const tx = document.getElementsByTagName('textarea');
             for (let i = 0; i < tx.length; i++) {

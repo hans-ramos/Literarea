@@ -31,103 +31,92 @@
         <!-- navigation bar -->
         <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
             <div class="container-fluid">
-                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="img/llogo.png">
-                <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea | Prompts</a></a>
+                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../img/llogo.png">
+                <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/" style="color: rgb(255,255,255);"> Home </a>
-                                </li>
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
-                                </li>
-                            {{/if}}
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/collection" style="color: rgb(255,255,255);padding: 8px 18px;"> My Collection </a>
-                                </li>
-                            {{/if}}
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
-                                </li>
-                            {{/if}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/view_stories" style="color: rgb(255,255,255);"> Stories </a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
-                                </li>
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/signout" style="color: rgb(255,255,255);padding: 8px 18px;"> Signout </a>
-                                </li>
-                            {{/if}}
-                            {{#unless username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/register" style="color: rgb(255,255,255);"> Register </a>
-                                </li>
-                            {{/unless}}
-                            {{#unless username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
-                                </li>
-                            {{/unless}}       
-                        </ul>
-
+                        {{#if username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
+                        </li>
+                        {{/if}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/story/view_stories" style="color: rgb(255,255,255);"> Stories </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/prompt/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
+                        </li>
+                        {{#if username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
+                        </li>
+                        {{/if}}
+                        {{#unless username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/register" style="color: rgb(255,255,255);"> Register </a>
+                        </li>
+                        {{/unless}}
+                        {{#unless username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
+                        </li>
+                        {{/unless}}
+                    </ul>
                 </div>
             </div>
         </nav>
 
-        <br> &nbsp;
-
         <!-- Sort By Buttons | https://getbootstrap.com/docs/4.0/components/buttons/ | at "checkbox and radio buttons" part -->
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-secondary" href="#">Recent</button>
-            <button type="button" class="btn btn-secondary" href="#">Most Viewed</button>
-            <button type="button" class="btn btn-secondary" href="#">Most Liked</button>
-            <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Genre
-              </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <a class="dropdown-item" href="#">Adventure</a>
-                <a class="dropdown-item" href="#">Mystery</a>
-                <a class="dropdown-item" href="#">Horror</a>
-                <a class="dropdown-item" href="#">etc.</a>
-              </div>
-            </div>
-        </div>
+        <div>
+            <div class="row px-4 py-2">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-secondary" href="#">Recent</button>
+                    <button type="button" class="btn btn-secondary" href="#">Most Viewed</button>
+                    <button type="button" class="btn btn-secondary" href="#">Most Liked</button>
+                    <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Genre
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Adventure</a>
+                        <a class="dropdown-item" href="#">Mystery</a>
+                        <a class="dropdown-item" href="#">Horror</a>
+                        <a class="dropdown-item" href="#">etc.</a>
+                    </div>
+                    </div>
+                </div>
 
-        <br><br>
+                <form method="get" action="/prompt/post_prompt" class="col">
+                    <div>
+                        <button type="submit" class="btn btn-secondary float-right" id="" onclick="">
+                            Post Prompt
+                        </button>
+                    </div>
+                </form>  
+        </div>
     
         <!-- Table | https://getbootstrap.com/docs/4.1/content/tables/ -->
-        <table class="table table-hover">
-            <thead class="thead" style="background-color: #1e2022; color: white;">
+        <div class="px-4 py-2">
+            <table class="table table-hover">
+                <thead class="thead" style="background-color: #1e2022; color: white;">
+                    <tr>
+                        <th scope="col">Prompt</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Likes</th>
+                        <th scope="col">User Author</th>
+                        <th scope="col">Date Posted</th>
+                    </tr>
+                </thead>
+                {{#each prompts}}
                 <tr>
-                    <th scope="col">Prompt</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Likes</th>
-                    <th scope="col">User Author</th>
-                    <th scope="col">Recommendation</th>
+                    <td><a href="/prompt/read_prompt/{{_id}}">{{prompt}}</a></td>
+                    <td>{{genre}}</td>
+                    <td>{{likes}}</td>
+                    <td><a href="/user/get_profile">{{author}}</a></td>
+                    <td>{{date_posted}}</td>
                 </tr>
-            </thead>
-            <tr>
-                <td>{<a href="/read_prompt">Prompt</a>}</td>
-                <td>{genre}</td>
-                <td>{#}</td>
-                <td>{<a href="/get_profile">Author</a>}</td>
-                <td>{rec}</td>
-            </tr>
-            <tr>
-                <td>{<a href="/read_prompt">Prompt</a>}</td>
-                <td>{genre}</td>
-                <td>{#}</td>
-                <td>{<a href="/get_profile">Author</a>}</td>
-                <td>{rec}</td>
-            </tr>
-        </table>
-
+                {{/each}}
+            </table>
+        </div>
     </body>
 </html>

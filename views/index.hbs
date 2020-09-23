@@ -34,107 +34,100 @@
                         <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                         <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                             <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/" style="color: rgb(255,255,255);"> Home </a>
-                                </li>
                                 {{#if username}}
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
-                                </li>
-                                {{/if}}
-                                {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/collection" style="color: rgb(255,255,255);padding: 8px 18px;"> My Collection </a>
-                                </li>
-                                {{/if}}
-                                {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
+                                    <a class="nav-link" href="/user/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
                                 </li>
                                 {{/if}}
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/view_stories" style="color: rgb(255,255,255);"> Stories </a>
+                                    <a class="nav-link" href="/story/view_stories" style="color: rgb(255,255,255);"> Stories </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
+                                    <a class="nav-link" href="/prompt/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
                                 </li>
                                 {{#if username}}
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/signout" style="color: rgb(255,255,255);padding: 8px 18px;"> Signout </a>
+                                    <a class="nav-link" href="/user/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
                                 </li>
                                 {{/if}}
                                 {{#unless username}}
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/register" style="color: rgb(255,255,255);"> Register </a>
+                                    <a class="nav-link" href="/user/register" style="color: rgb(255,255,255);"> Register </a>
                                 </li>
                                 {{/unless}}
                                 {{#unless username}}
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
+                                    <a class="nav-link" href="/user/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
                                 </li>
                                 {{/unless}}
-                                
                             </ul>
-
                         </div>
                     </div>
             </nav>
-			<title> Home </title>
+			<title> Literarea </title>
 
 			<div  style="background-color: #f0f5f9;">
 				<div class="img-div">
-				</div>
-
-				<div class="container text-center pt-4">
-					<div class="row">
-						<div class="col-3">
-							<img src="img/search_story.png" class="img-fluid">
-						</div>
-						<div class="col-3">
-                        	<img src="img/post_story.png" class="img-fluid">
+			    </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6 border">
+                        <h1>Top Stories</h1>
+                        <div class="px-4 py-2">
+                            <table class="table table-hover">
+                                <thead class="thead" style="background-color: #1e2022; color: white;">
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Genre</th>
+                                        <th scope="col">Likes</th>
+                                        <th scope="col">User Author</th>
+                                    </tr>
+                                </thead>
+                                    <tr>
+                                        <td>{<a href="/story/read_story">Title</a>}</td>
+                                        <td>{genre}</td>
+                                        <td>{#}</td>
+                                        <td>{<a href="/user/get_profile">Author</a>}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{<a href="/story/read_story">Title</a>}</td>
+                                        <td>{genre}</td>
+                                        <td>{#}</td>
+                                        <td>{<a href="/user/get_profile">Author</a>}</td>
+                                    </tr>
+                            </table>
                         </div>
-						<div class="col-3">
-                        	<img src="img/search_prompt.png" class="img-fluid">
+                    </div>
+                    <div class="col-6 border">
+                        <h1>Top Prompts</h1>
+                        <div class="px-4 py-2">
+                            <table class="table table-hover">
+                                <thead class="thead" style="background-color: #1e2022; color: white;">
+                                    <tr>
+                                        <th scope="col">Prompt</th>
+                                        <th scope="col">Genre</th>
+                                        <th scope="col">Likes</th>
+                                        <th scope="col">User Author</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
+                                    <td>{genre}</td>
+                                    <td>{#}</td>
+                                    <td>{<a href="/user/get_profile">Author</a>}</td>
+                                </tr>
+                                <tr>
+                                    <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
+                                    <td>{genre}</td>
+                                    <td>{#}</td>
+                                    <td>{<a href="/user/get_profile">Author</a>}</td>
+                                </tr>
+                            </table>
                         </div>
-						<div class="col-3">
-							<img src="img/post_prompt.png" class="img-fluid">
-						</div>
-					</div>
-				</div>
-
-				<div class="container text-center pt-4" style="background-color: #f0f5f9;">
-					<div class="row py-5">
-                        <form method="get" action="/view_stories" class="col-3">
-                            <div>
-                                <button type="submit" class="btn btn-primary" id="">
-                                    Search Stories
-                                </button>
-                            </div>
-                        </form>
-                        <form method="get" action="/post_story" class="col-3">
-                            <div>
-                                <button type="submit" class="btn btn-primary" id="" onclick="">
-                                    Post Story
-                                </button>
-                            </div>
-                        </form>
-                        <form method="get" action="/view_prompts" class="col-3">
-                            <div>
-                                <button type="submit" class="btn btn-primary" id=""> 
-                                    Search Prompts
-                                </button>
-                            </div>
-                        </form>
-                        <form method="get" action="/post_prompt" class="col-3">
-                            <div>
-                                <button type="submit" class="btn btn-primary" id="" onclick="">
-                                    Post Prompt
-                                </button>
-                            </div>
-                        </form>                        
-					</div>
-				</div>
-			</div>
+                    </div>
+                </div>
+            </div>
 		</main>		  
 	</body>
 </html>

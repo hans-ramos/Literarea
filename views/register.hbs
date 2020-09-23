@@ -51,10 +51,12 @@
 		<div class="col-sm-9 main-section">
 			<div class="modal-content">
 				<div class="col-12 logo-img">
-					<img src="img/llogo.png">
+					<img src="../img/llogo.png">
 				</div>
-				<form id="login" name="login">
-                    
+                {{#if error}}
+                    <div class="text-danger">{{error}}</div>
+                {{/if}}
+				<form id="login" name="register_form" method="post" action="register_form">
 					<div class="col-12 form-input">
                         
                         <div class="login-form-group">
@@ -68,11 +70,11 @@
 							<input type="password" class="form-control" placeholder="Password" id="password" name="password">
 						</div>
 
-						<button type="button" class="btn-reg" id="login-btn">Register</button>
+						<button type="submit" class="btn-reg" id="login-btn">Register</button>
 					</div>
 				</form>
 				<div class="col-12 register">
-					Already have an account? <a href="/login"> Login here </a>
+					Already have an account? <a href="/user/login"> Login here </a>
 				</div>
 			</div>
 		</div>

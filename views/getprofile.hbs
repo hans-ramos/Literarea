@@ -28,117 +28,99 @@
         
         <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
             <div class="container-fluid">
-                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="img/llogo.png">
-                    <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a>
-                </a>
+                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../img/llogo.png">
+                <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/" style="color: rgb(255,255,255);"> Home </a>
-                                </li>
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
-                                </li>
-                            {{/if}}
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/collection" style="color: rgb(255,255,255);padding: 8px 18px;"> My Collection </a>
-                                </li>
-                            {{/if}}
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
-                                </li>
-                            {{/if}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/view_stories" style="color: rgb(255,255,255);"> Stories </a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
-                                </li>
-                            {{#if username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/signout" style="color: rgb(255,255,255);padding: 8px 18px;"> Signout </a>
-                                </li>
-                            {{/if}}
-                            {{#unless username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/register" style="color: rgb(255,255,255);"> Register </a>
-                                </li>
-                            {{/unless}}
-                            {{#unless username}}
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href="/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
-                                </li>
-                            {{/unless}}       
-                        </ul>
+                        {{#if username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/subscriptions" style="color: rgb(255,255,255);padding: 8px 18px;"> Subscriptions </a>
+                        </li>
+                        {{/if}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/story/view_stories" style="color: rgb(255,255,255);"> Stories </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/prompt/view_prompts" style="color: rgb(255,255,255);"> Prompts </a>
+                        </li>
+                        {{#if username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/userprofile" style="color: rgb(255,255,255);padding: 8px 18px;"> Profile </a>
+                        </li>
+                        {{/if}}
+                        {{#unless username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/register" style="color: rgb(255,255,255);"> Register </a>
+                        </li>
+                        {{/unless}}
+                        {{#unless username}}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/user/login" style="color: rgb(255,255,255);padding: 8px 18px;"> Login </a>
+                        </li>
+                        {{/unless}}
+                    </ul>
                 </div>
             </div>
         </nav>
+        <div class="px-3 py-2">
+            <div class="card float-left mr-2" id="user-info" style="width: 30%;">
+                <div class="card-header">
+                    <h5 class="mb-0" style="color: #black;"><strong>User Information</strong></h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Username:</strong>&nbsp;</span><span class="float-right info-field"> {username} </span></li>
 
-        <div class="card float-left" id="user-info" style="width: 30%; margin: 0 auto">
-            <div class="card-header">
-                <h5 class="mb-0" style="color: #black;"><strong>User Information</strong></h5>
+                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> Intro </span></li>
+
+                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> Bio </span></li>
+                        <button class="btn btn-primary" id="" type="button" style="margin: 20px;background-color: #1e2022;"> Follow Author </button>
+                    </ul>
+                </div>
             </div>
-            <div class="card-body">
-                <ul class="list-group">
-                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Username:</strong>&nbsp;</span><span class="float-right info-field"> {username} </span></li>
 
-                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> Intro </span></li>
-
-                    <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> Bio </span></li>
-                    <button class="btn btn-primary" id="" type="button" style="margin: 20px;background-color: #1e2022;"> Follow Author </button>
-                </ul>
+            <div class="row">
+                <h1>{Author's} Stories</h1>
+                <table class="table table-hover">
+                    <thead class="thead" style="background-color: #1e2022; color: white;">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Likes</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>{<a href="/story/read_story">Title</a>}</td>
+                        <td>{genre}</td>
+                        <td>{#}</td>
+                    </tr>
+                    <tr>
+                        <td>{<a href="/story/read_story">Title</a>}</td>
+                        <td>{genre}</td>
+                        <td>{#}</td>
+                    </tr>
+                </table>
+                <h1>{Author's} Prompts</h1>
+                <table class="table table-hover">
+                    <thead class="thead" style="background-color: #1e2022; color: white;">
+                        <tr>
+                            <th scope="col">Prompt</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Likes</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
+                        <td>{genre}</td>
+                        <td>{#}</td>
+                    </tr>
+                    <tr>
+                        <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
+                        <td>{genre}</td>
+                        <td>{#}</td>
+                    </tr>
+                </table>
             </div>
-        </div>
-        <div class="row">
-            <h1>{Author's} Stories</h1>
-            <table class="table table-hover">
-                <thead class="thead" style="background-color: #1e2022; color: white;">
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Likes</th>
-                        <th scope="col">Recommendation</th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td>{<a href="/read_story">Title</a>}</td>
-                    <td>{genre}</td>
-                    <td>{#}</td>
-                    <td>{rec}</td>
-                </tr>
-                <tr>
-                    <td>{<a href="/read_story">Title</a>}</td>
-                    <td>{genre}</td>
-                    <td>{#}</td>
-                    <td>{rec}</td>
-                </tr>
-            </table>
-            <h1>{Author's} Prompts</h1>
-            <table class="table table-hover">
-                <thead class="thead" style="background-color: #1e2022; color: white;">
-                    <tr>
-                        <th scope="col">Prompt</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Likes</th>
-                        <th scope="col">Recommendation</th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td>{<a href="/read_prompt">Prompt</a>}</td>
-                    <td>{genre}</td>
-                    <td>{#}</td>
-                    <td>{rec}</td>
-                </tr>
-                <tr>
-                    <td>{<a href="/read_prompt">Prompt</a>}</td>
-                    <td>{genre}</td>
-                    <td>{#}</td>
-                    <td>{rec}</td>
-                </tr>
-            </table>
         </div>
     </body>
 </html>
