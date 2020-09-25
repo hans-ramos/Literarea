@@ -37,54 +37,43 @@ router.post("/register_form",urlencoder,(req,res)=>{
         res.render("register.hbs", {
             error: "One or more fields are empty. Please enter valid values"
         })
-    // }else if (!isEmailAvailable(email)){
-    //     res.render("register.hbs",{
-    //         error:"Email address has already been used"
-    //     })
-    // }else if (!isUsernameAvailable(username)){
-    //     res.render("register.hbs",{
-    //         error:"Username has already been taken"
-    //     })
     }else{
-        let encryptPw = CryptoJS.MD5(password).toString()
-        let user = new User({
-            email:email,
-            username:username,
-            password:encryptPw
+        User.findOne({email:email},function(err, result){
+            if(err){
+                console.log("Error" + err)
+            }
+            else if(result){
+                res.render("register.hbs",{
+                    error:"Email has already been used"
+                })
+            }
+            else{
+                User.findOne({username:username},function(err, result){
+                    if(err){
+                        console.log("Error"+err)
+                    }
+                    else if (result){
+                        res.render("register.hbs",{
+                            error:"Username has already been taken"
+                        })
+                    }
+                    else{
+                        let encryptPw = CryptoJS.MD5(password).toString()
+                        let user = new User({
+                            email:email,
+                            username:username,
+                            password:encryptPw
+                        })
+                        user.save().then((doc)=>{
+                            req.session.username=username;
+                            res.redirect("/")
+                        })
+                    }
+                })
+            }
         })
-        user.save().then((doc)=>{
-            req.session.username=username;
-            res.redirect("/")
-        })
-    }    
+    }  
 })
-
-function isEmailAvailable(email){
-    User.findOne({email:email}).then(user =>{
-        if(!user){
-            console.log("Student is: " + JSON.stringify(user));
-            return true
-        }
-        else{
-            console.log("Student is: " + JSON.stringify(user));
-            return false
-        }
-    })
-}
-
-function isUsernameAvailable(username){
-    User.findOne({username:username},function(err, result){
-        if (err){
-            console.log("Error: "+ err)
-        }
-        else if(result){
-            console.log("Student is: " + JSON.stringify(result));
-            return false
-        }else{
-            return true
-        }
-    })
-}
 
 router.get("/login", (req,res)=>{
     if(!req.session.username)
@@ -145,14 +134,33 @@ router.get("/subscriptions", (req,res)=>{
     }
 })
 
-router.get("/get_profile",(req,res)=>{
+router.get("/get_profile/:id",(req,res)=>{
     if (req.session.username){
-        res.render("getprofile.hbs",{
-            username:req.session.username
+        User.findOne({username:req.params.id}).then((user)=>{
+            Story.find({author:req.params.id}).then((stories)=>{
+                Prompt.find({author:req.params.id}).then((prompts)=>{
+                    res.render("getprofile.hbs",{
+                        username:req.session.username,
+                        stories:stories,
+                        prompts:prompts,
+                        user_profile:user
+                    })
+                })
+            })
         })
     }
     else{
-        res.render("getprofile.hbs")
+        User.findOne({username:req.params.id}).then((user)=>{
+            Story.find({author:req.params.id}).then((stories)=>{
+                Prompt.find({author:req.params.id}).then((prompts)=>{
+                    res.render("getprofile.hbs",{
+                        stories:stories,
+                        prompts:prompts,
+                        user_profile:user
+                    })
+                })
+            })
+        })
     }
 })
 

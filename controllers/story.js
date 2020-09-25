@@ -51,7 +51,6 @@ router.post("/post_story_form",urlencoder,(req,res)=>{
     let title = req.body.title
     let genre = req.body.story_genre
     let body = req.body.story_body
-    console.log(req.body.story_body)
     let story = new Story({
         title: title,
         date_posted: new Date(),
@@ -65,15 +64,33 @@ router.post("/post_story_form",urlencoder,(req,res)=>{
     })
 })
 
-router.get("/edit_story", (req,res)=>{
+router.get("/edit_story/:id", (req,res)=>{
     if(!req.session.username){
         res.redirect("/user/login")
     }
     else{
-        res.render("edit_story.hbs",{
-            username:req.session.username
+        Story.findOne({_id:req.params.id}).then((doc)=>{
+            res.render("edit_story.hbs",{
+                username:req.session.username,
+                story:doc
+            })
         })
     }
+})
+
+router.post("/edit_story/edit_story_form",urlencoder, (req,res)=>{
+    let id = req.body.id
+    let title= req.body.title
+    let genre = req.body.story_genre
+    let body = req.body.story_body
+    Story.findOneAndUpdate({_id:id},
+        {
+            title:title,
+            genre:genre,
+            body:body
+        }).then((doc)=>{
+            res.redirect("/user/userprofile")
+        })
 })
 
 router.get("/read_story/:id",(req,res)=>{
@@ -94,4 +111,20 @@ router.get("/read_story/:id",(req,res)=>{
         })
     }
 })
+
+router.post("/delete_story", urlencoder,(req,res)=>{
+    let id = req.body.id
+    Story.deleteOne({
+        _id:id
+    }).then((doc)=>{
+        if(doc.n){
+            res.send(true)
+        }else{
+            res.send(false)
+        }
+    }, (err)=>{
+        res.send(false)
+    })
+})
+
 module.exports = router

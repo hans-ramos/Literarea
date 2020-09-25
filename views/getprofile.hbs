@@ -5,9 +5,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
-    <link rel="stylesheet" href="../css/Header-Dark.css">
-    <link rel="stylesheet" href="../css/Navigation-Clean.css">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../css/Header-Dark.css">
+    <link rel="stylesheet" href="../../css/Navigation-Clean.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
@@ -16,19 +16,19 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="icon" href="../img/llogo.png">
+    <link rel="icon" href="../../img/llogo.png">
 
     <!-- Other CSS Files -->
-    <link rel="stylesheet" type="text/css" href="../css/home.css">
-    <link rel="stylesheet" type="text/css" href="../css/login.css">
-    <link rel="stylesheet" type="text/css" href="../css/error.css">
+    <link rel="stylesheet" type="text/css" href="../../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../../css/error.css">
 	</head>
 	<body>
-        <title> User Profile </title>
+        <title>{{user_profile.username}}'s Profile </title>
         
         <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
             <div class="container-fluid">
-                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../img/llogo.png">
+                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                 <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
@@ -69,18 +69,18 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Username:</strong>&nbsp;</span><span class="float-right info-field"> {username} </span></li>
+                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Username:</strong>&nbsp;</span><span class="float-right info-field"> {{user_profile.username}} </span></li>
 
-                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> Intro </span></li>
+                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{user_profile.intro}} </span></li>
 
-                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> Bio </span></li>
-                        <button class="btn btn-primary" id="" type="button" style="margin: 20px;background-color: #1e2022;"> Follow Author </button>
+                        <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{user_profile.bio}} </span></li>
+                        <button data-id="{{_id}}" class="btn btn-primary" id="" type="button" style="margin: 20px;background-color: #1e2022;"> Follow Author </button>
                     </ul>
                 </div>
             </div>
 
             <div class="row">
-                <h1>{Author's} Stories</h1>
+                <h1>{{user_profile.username}}'s Stories</h1>
                 <table class="table table-hover">
                     <thead class="thead" style="background-color: #1e2022; color: white;">
                         <tr>
@@ -89,18 +89,15 @@
                             <th scope="col">Likes</th>
                         </tr>
                     </thead>
+                    {{#each stories}}
                     <tr>
-                        <td>{<a href="/story/read_story">Title</a>}</td>
-                        <td>{genre}</td>
-                        <td>{#}</td>
+                        <td><a href="/story/read_story/{{_id}}">{{title}}</a></td>
+                        <td>{{genre}}</td>
+                        <td>{{likes}}</td>
                     </tr>
-                    <tr>
-                        <td>{<a href="/story/read_story">Title</a>}</td>
-                        <td>{genre}</td>
-                        <td>{#}</td>
-                    </tr>
+                    {{/each}}
                 </table>
-                <h1>{Author's} Prompts</h1>
+                <h1>{{user_profile.username}}'s Prompts</h1>
                 <table class="table table-hover">
                     <thead class="thead" style="background-color: #1e2022; color: white;">
                         <tr>
@@ -109,16 +106,13 @@
                             <th scope="col">Likes</th>
                         </tr>
                     </thead>
+                    {{#each prompts}}
                     <tr>
-                        <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
-                        <td>{genre}</td>
-                        <td>{#}</td>
+                        <td><a href="/prompt/read_prompt/{{_id}}">{{prompt}}</a></td>
+                        <td>{{genre}}</td>
+                        <td>{{likes}}</td>
                     </tr>
-                    <tr>
-                        <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
-                        <td>{genre}</td>
-                        <td>{#}</td>
-                    </tr>
+                    {{/each}}
                 </table>
             </div>
         </div>

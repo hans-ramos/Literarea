@@ -8,9 +8,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="../css/Header-Dark.css">
-        <link rel="stylesheet" href="../css/Navigation-Clean.css">
-        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../../css/Header-Dark.css">
+        <link rel="stylesheet" href="../../css/Navigation-Clean.css">
+        <link rel="stylesheet" href="../../css/styles.css">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
@@ -19,10 +19,10 @@
         <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="icon" href="../img/llogo.png">
+        <link rel="icon" href="../../img/llogo.png">
         
         <!-- Other CSS Files -->
-        <link rel="stylesheet" type="text/css" href="../css/post-story-prompt.css">
+        <link rel="stylesheet" type="text/css" href="../../css/post-story-prompt.css">
     </head>
     
 	<body>
@@ -31,7 +31,7 @@
         <!-- navigation bar -->
         <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
             <div class="container-fluid">
-                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../img/llogo.png">
+                <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                 <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
@@ -65,29 +65,30 @@
                 </div>
             </div>
         </nav>
-
-        <div class="post-story-form">
-            <form>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Title</label>
-                  <input type="text" class="form-control" id="storyTitle" placeholder="{title}">
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Genre</label>
-                  <select class="form-control" id="storyGenre">
-                    <option value="" disabled selected hidden>select genre</option>
-                    <option value="adventure">Adventure</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="horror">Horror</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Story</label>
-                  <textarea class="form-control" id="storyContent" rows="5"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Edit</button>
-              </form>
-        </div>
-
+        {{#with story}}
+            <div class="post-story-form">
+                <form method="post" action="edit_story_form">
+                    <div class="form-group">
+                    <input type="hidden" name="id" value="{{_id}}">
+                    <label for="exampleFormControlInput1">Title</label>
+                    <input type="text" class="form-control" id="storyTitle" name="title" value="{{title}}">
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlSelect1">Genre</label>
+                    <select class="form-control" id="storyGenre" name="story_genre">
+                        <option value="" disabled selected hidden>Select genre</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Horror">Horror</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Story</label>
+                    <textarea name="story_body" class="form-control" id="storyContent" rows="5">{{body}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Edit</button>
+                </form>
+            </div>
+        {{/with}}
     </body>
 </html>

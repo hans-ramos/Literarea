@@ -62,15 +62,31 @@ router.post("/post_prompt_form",urlencoder,(req,res)=>{
     })
 })
 
-router.get("/edit_prompt", (req,res)=>{
+router.get("/edit_prompt/:id", (req,res)=>{
     if(!req.session.username){
         res.redirect("/user/login")
     }
     else{
-        res.render("edit_prompt.hbs",{
-            username:req.session.username
+        Prompt.findOne({_id:req.params.id}).then((doc)=>{
+            res.render("edit_prompt.hbs",{
+                username:req.session.username,
+                prompt:doc
+            })
         })
     }
+})
+
+router.post("/edit_prompt/edit_prompt_form", urlencoder,(req,res)=>{
+    let id=req.body.id
+    let prompt=req.body.prompt
+    let genre=req.body.prompt_genre
+    Prompt.findOneAndUpdate({_id:id},
+        {
+            prompt:prompt,
+            genre:genre
+        }).then((doc)=>{
+            res.redirect("/user/userprofile")
+        })
 })
 
 
@@ -92,4 +108,20 @@ router.get("/read_prompt/:id",(req,res)=>{
         })
     }
 })
+
+router.post("/delete_prompt", urlencoder,(req,res)=>{
+    let id = req.body.id
+    Prompt.deleteOne({
+        _id:id
+    }).then((doc)=>{
+        if(doc.n){
+            res.send(true)
+        }else{
+            res.send(false)
+        }
+    }, (err)=>{
+        res.send(false)
+    })
+})
+
 module.exports = router

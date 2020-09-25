@@ -84,18 +84,14 @@
                                         <th scope="col">User Author</th>
                                     </tr>
                                 </thead>
+                                {{#each stories}}
                                     <tr>
-                                        <td>{<a href="/story/read_story">Title</a>}</td>
-                                        <td>{genre}</td>
-                                        <td>{#}</td>
-                                        <td>{<a href="/user/get_profile">Author</a>}</td>
+                                        <td><a href="/story/read_story/{{_id}}">{{title}}</a></td>
+                                        <td>{{genre}}</td>
+                                        <td>{{likes}}</td>
+                                        <td><a href="/user/get_profile/{{author}}">{{author}}</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>{<a href="/story/read_story">Title</a>}</td>
-                                        <td>{genre}</td>
-                                        <td>{#}</td>
-                                        <td>{<a href="/user/get_profile">Author</a>}</td>
-                                    </tr>
+                                {{/each}}
                             </table>
                         </div>
                     </div>
@@ -111,18 +107,14 @@
                                         <th scope="col">User Author</th>
                                     </tr>
                                 </thead>
-                                <tr>
-                                    <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
-                                    <td>{genre}</td>
-                                    <td>{#}</td>
-                                    <td>{<a href="/user/get_profile">Author</a>}</td>
-                                </tr>
-                                <tr>
-                                    <td>{<a href="/prompt/read_prompt">Prompt</a>}</td>
-                                    <td>{genre}</td>
-                                    <td>{#}</td>
-                                    <td>{<a href="/user/get_profile">Author</a>}</td>
-                                </tr>
+                                {{#each prompts}}
+                                    <tr>
+                                        <td><a href="/prompt/read_prompt/{{_id}}">{{prompt}}</a></td>
+                                        <td>{{genre}}</td>
+                                        <td>{{likes}}</td>
+                                        <td><a href="/user/get_profile/{{author}}">{{author}}</a></td>
+                                    </tr>
+                                {{/each}}
                             </table>
                         </div>
                     </div>

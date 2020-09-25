@@ -67,12 +67,11 @@
                 </div>
             </div>
         </nav>
-        {{#with prompt}}
         <div class="content">
             <div class="prompt-contents-form">
                 <form>
                     <div class="form-group">
-                        <label for="promptContent"><h5>{{prompt}}</h5><h6>{{author}} | {{genre}} | {{likes}}</h6></label>
+                        <label for="promptContent"><h5>{{prompt.prompt}}</h5><h6>{{prompt.author}} | {{prompt.genre}} | {{prompt.likes}} likes</h6></label>
                     </div>
                 </form>
             </div>
@@ -110,7 +109,6 @@
                 </div>
             </div>
         </div>
-        {{/with}}
         <script> // for auto adjust textarea | https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
             const tx = document.getElementsByTagName('textarea');
             for (let i = 0; i < tx.length; i++) {

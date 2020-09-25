@@ -66,13 +66,12 @@
                 </div>
             </div>
         </nav>
-        {{#with story}}
         <div class="content">
             <div class="story-contents-form">
                 <form>
                     <div class="form-group">
-                        <label for="storyContent"><h5>{{title}}</h5><h6>{{author}} | {{genre}} | {{likes}}</h6></label>
-                        <div class id="storyContent">{{body}}</div>
+                        <label for="storyContent"><h5>{{story.title}}</h5><h6>{{story.author}} | {{story.genre}} | {{story.likes}} likes</h6></label>
+                        <div class id="storyContent">{{story.body}}</div>
                     </div>
                 </form>
             </div>
@@ -82,7 +81,7 @@
                     <div class="col">
                         <div class="commentsDiv">
                             <h5>Comments:</h5>
-                            {{#if username}}
+                            {{#unless username}}
                             <form> <!-- post comment -->
                                 <div class="form-group">
                                     <label for="storyComment">Post a comment:</label>
@@ -90,7 +89,7 @@
                                 </div>
                                     <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
                             </form>
-                            {{/if}}
+                            {{/unless}}
                             <br>
 
                             <!-- posted comments -->
@@ -110,7 +109,6 @@
                 </div>
             </div>
         </div>
-         {{/with}}
         <script> // for auto adjust textarea | https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
             const tx = document.getElementsByTagName('textarea');
             for (let i = 0; i < tx.length; i++) {
