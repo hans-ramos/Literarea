@@ -36,7 +36,6 @@ router.get("/", (req,res)=>{
         },(err)=>{
             console.log("error")
         })
-        res.render("index.hbs")
     }
     else{
         Story.find({}).then((stories)=>{
@@ -51,7 +50,6 @@ router.get("/", (req,res)=>{
         },(err)=>{
             console.log("error")
         })
-        res.render("index.hbs")
     }
 })
 
