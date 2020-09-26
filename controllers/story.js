@@ -29,7 +29,6 @@ router.get("/view_stories",(req,res)=>{
     else{
         Story.find({}).then((docs)=>{
             res.render("view_stories.hbs",{
-                username:req.session.username,
                 stories: docs
             })
         })

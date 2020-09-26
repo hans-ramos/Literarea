@@ -102,6 +102,16 @@ router.post("/login_form",urlencoder, (req,res)=>{
     })
 })
 
+router.get("/about_us",(req,res)=>{
+    if (req.session.username){
+        res.render("about_us.hbs",{
+            username:req.session.username
+        })
+    }
+    else{
+        res.render("about_us.hbs")
+    }
+})
 
 router.get("/userprofile", (req,res)=>{
     if(!req.session.username){

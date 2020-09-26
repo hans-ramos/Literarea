@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="icon" href="../img/llogo.png">
+
     <!-- Other CSS Files -->
     <link rel="stylesheet" type="text/css" href="../css/home.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
@@ -29,7 +29,7 @@
 
 		<main>
             <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
-                    <div class="container-fluid">
+                <div class="container-fluid">
                     <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                     <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                     <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
@@ -67,62 +67,37 @@
                     </div>
                 </div>
             </nav>
-			<title> Literarea </title>
+			<title> About Us </title>
 
-			<div  style="background-color: #f0f5f9;">
-				<div class="img-div">
-			    </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-6 border">
-                        <h1>Top Stories</h1>
-                        <div class="px-4 py-2">
-                            <table class="table table-hover">
-                                <thead class="thead" style="background-color: #1e2022; color: white;">
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Genre</th>
-                                        <th scope="col">Likes</th>
-                                        <th scope="col">User Author</th>
-                                    </tr>
-                                </thead>
-                                {{#each stories}}
-                                    <tr>
-                                        <td><a href="/story/read_story/{{_id}}">{{title}}</a></td>
-                                        <td>{{genre}}</td>
-                                        <td>{{likes}}</td>
-                                        <td><a href="/user/get_profile/{{author}}">{{author}}</a></td>
-                                    </tr>
-                                {{/each}}
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-6 border">
-                        <h1>Top Prompts</h1>
-                        <div class="px-4 py-2">
-                            <table class="table table-hover">
-                                <thead class="thead" style="background-color: #1e2022; color: white;">
-                                    <tr>
-                                        <th scope="col">Prompt</th>
-                                        <th scope="col">Genre</th>
-                                        <th scope="col">Likes</th>
-                                        <th scope="col">User Author</th>
-                                    </tr>
-                                </thead>
-                                {{#each prompts}}
-                                    <tr>
-                                        <td><a href="/prompt/read_prompt/{{_id}}">{{prompt}}</a></td>
-                                        <td>{{genre}}</td>
-                                        <td>{{likes}}</td>
-                                        <td><a href="/user/get_profile/{{author}}">{{author}}</a></td>
-                                    </tr>
-                                {{/each}}
-                            </table>
-                        </div>
+			<div  style="">
+                <div class="p-2" id="aboutusDIv" style="float: left; width: 50%; height: 100%;">
+                    <div>
+                        <h2 class="contentTitle"> Project Description </h2>
+                        <hr class="hr1">
+                            <ul class="ulContent">
+                                <li>Short description about the project!!!!!!!!!!</li>
+                            </ul>
                     </div>
                 </div>
-            </div>
+                
+                <div class="p-2" id="Packages" style="float: right; width: 50%; height: 100%;">
+                    <div>
+                        <h2 class="contentTitle"> Project Packages </h2>
+                        <hr class="hr1">
+                            <ul class="ulContent">
+                                <li>Body-Parser</li>
+                                <li>Bootstrap</li>
+                                <li>Cookie-Parser</li>
+                                <li>Crypto-JS</li>
+                                <li>Express</li>
+                                <li>Express-Session</li>
+                                <li>HBS</li>
+                                <li>Mongoose</li>
+                                <li>Nodemon</li>
+                            </ul>
+                    </div>
+                </div>
+			</div>
 		</main>		  
 	</body>
 </html>

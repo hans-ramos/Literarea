@@ -7,7 +7,7 @@ const session = require("express-session")
 const app = express()
 
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost:27017/literarea", {
+mongoose.connect("mongodb+srv://admin:p@ssword@cluster0.jd2cr.mongodb.net/Literarea?retryWrites=true&w=majority", {
   useNewUrlParser:true
 })
 
@@ -23,4 +23,4 @@ app.use(session({
 
 app.use(require("./controllers"))
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
