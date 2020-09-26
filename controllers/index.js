@@ -30,6 +30,8 @@ router.get("/", (req,res)=>{
                     stories:stories,
                     prompts:prompts
                 })
+            },(err)=>{
+                console.log("Error: " + err)
             })
         })
     }
@@ -39,6 +41,8 @@ router.get("/", (req,res)=>{
                 res.render("index.hbs",{
                     stories:stories,
                     prompts:prompts
+                },(err)=>{
+                    console.log("Error: " + err)
                 })
             })
         })
