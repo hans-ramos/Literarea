@@ -30,6 +30,8 @@ router.get("/", (req,res)=>{
                     stories:stories,
                     prompts:prompts
                 })
+            },(err)=>{
+                console.log("error")
             })
         })
     }
@@ -40,6 +42,8 @@ router.get("/", (req,res)=>{
                     stories:stories,
                     prompts:prompts
                 })
+            },(err)=>{
+                console.log("error")
             })
         })
     }
