@@ -8,7 +8,8 @@ const app = express()
 
 mongoose.Promise = global.Promise
 mongoose.connect("mongodb+srv://admin:p@ssword@cluster0.jd2cr.mongodb.net/Literarea?retryWrites=true&w=majority", {
-  useNewUrlParser:true
+  useNewUrlParser:true,
+  useUnifiedTopology: true
 })
 
 app.set("view engine", "hbs")
