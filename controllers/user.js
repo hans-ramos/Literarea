@@ -110,9 +110,7 @@ router.get("/about_us",(req,res)=>{
             })
     }
     else{
-        res.render("about_is.hbs",{
-                username:req.session.username
-            })
+        res.render("about_us.hbs")
         }
     }
 )
