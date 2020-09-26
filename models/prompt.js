@@ -6,7 +6,10 @@ let Prompt = mongoose.model("prompt",{
         author:String,
         genre:String,
         likes:Number,
-        comments:[String]
+        comments:[{
+            comment:String,
+            commenter:String
+         }]
     })
 module.exports={
     Prompt

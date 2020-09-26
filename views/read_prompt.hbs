@@ -82,27 +82,24 @@
                         <div class="commentsDiv">
                             <h5>Comments</h5>
                             {{#if username}}
-                            <form> <!-- post comment -->
+                            <form method="post" action="post_prompt_comment"> <!-- post comment -->
+                                <input type="hidden" name="id" value={{prompt._id}}>
                                 <div class="form-group">
                                     <label for="storyComment">Post a comment:</label>
-                                    <textarea class="form-control" id="storyComment" rows="3"></textarea>
+                                    <textarea class="form-control" id="promptComment" rows="3" name="comment"></textarea>
                                 </div>
-                                    <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
+                                    <button type="submit" class="post_comment btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
                             </form>
                             {{/if}}
                             <br>
 
                             <!-- posted comments -->
                             <table class="table table-striped" id="commentsTable">
+                                {{#each prompt.comments}}
                                 <tr class="username">
-                                    <td><h6>{username1}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia tenetur ipsa eveniet molestiae beatae. Quibusdam nostrum nesciunt mollitia accusamus, quis error molestiae voluptatibus nihil accusantium ipsam odit doloremque quod illo!}</td>
+                                    <td><h6>{{commenter}}</h6>{{comment}}</td>
                                 </tr>
-                                <tr class="username">
-                                    <td><h6>{username2}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus rerum neque dignissimos eum incidunt dolorum sit ullam. Minima, officiis corporis! Eaque est id aliquam vitae beatae iure nulla distinctio assumenda?}</td>
-                                </tr>
-                                <tr class="username">
-                                    <td><h6>{username3}</h6>{Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quibusdam? In id, cumque facilis temporibus voluptas delectus itaque quasi, officiis debitis voluptate sed eaque laborum, consectetur molestias similique iure velit.}</td>
-                                </tr>
+                                {{/each}}
                             </table>
                         </div>
                     </div>

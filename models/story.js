@@ -1,9 +1,5 @@
 const mongoose = require("mongoose")
 
-// let Comment = mongoose.model("comment",{
-//     content:String,
-//     commenter:String
-// })
 
 let Story =mongoose.model("story",{
         title:String,

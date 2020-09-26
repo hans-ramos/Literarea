@@ -124,4 +124,21 @@ router.post("/delete_prompt", urlencoder,(req,res)=>{
     })
 })
 
+router.post("/read_prompt/post_prompt_comment",urlencoder,(req,res)=>{
+    let id =req.body.id
+    let comment = req.body.comment
+    Prompt.findOneAndUpdate({_id:id},
+        {
+            $push: {
+                comments:{
+                    comment:comment,
+                    commenter:req.session.username
+                }
+            }
+        }).then((doc)=>{
+            res.redirect("/prompt/read_prompt/" + id)
+        })
+})
+
+
 module.exports = router
