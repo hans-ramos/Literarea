@@ -23,33 +23,35 @@ router.use("/prompt", require("./prompt"))
 
 router.get("/", (req,res)=>{
     if(req.session.username){
-        Story.find({}).limit(10).then((stories)=>{
-            Prompt.find({}).limit(10).then((prompts)=>{
-                res.render("index.hbs",{
-                    username:req.session.username,
-                    stories:stories,
-                    prompts:prompts
-                })
-            },(err)=>{
-                console.log("error")
-            })
-        },(err)=>{
-            console.log("error")
-        })
+        // Story.find({}).limit(10).then((stories)=>{
+        //     Prompt.find({}).limit(10).then((prompts)=>{
+        //         res.render("index.hbs",{
+        //             username:req.session.username,
+        //             stories:stories,
+        //             prompts:prompts
+        //         })
+        //     },(err)=>{
+        //         console.log("error")
+        //     })
+        // },(err)=>{
+        //     console.log("error")
+        // })
+        res.render("index.hbs")
     }
     else{
-        Story.find({}).limit(10).then((stories)=>{
-            Prompt.find({}).limit(10).then((prompts)=>{
-                res.render("index.hbs",{
-                    stories:stories,
-                    prompts:prompts
-                })
-            },(err)=>{
-                console.log("error")
-            })
-        },(err)=>{
-            console.log("error")
-        })
+        // Story.find({}).limit(10).then((stories)=>{
+        //     Prompt.find({}).limit(10).then((prompts)=>{
+        //         res.render("index.hbs",{
+        //             stories:stories,
+        //             prompts:prompts
+        //         })
+        //     },(err)=>{
+        //         console.log("error")
+        //     })
+        // },(err)=>{
+        //     console.log("error")
+        // })
+        res.render("index.hbs")
     }
 })
 
