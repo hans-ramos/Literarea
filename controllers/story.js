@@ -24,17 +24,14 @@ router.get("/view_stories",(req,res)=>{
                 username:req.session.username,
                 stories: docs
             })
-        },(err)=>{
-            console.log("Error: " + err)
         })
     }
     else{
         Story.find({}).then((docs)=>{
             res.render("view_stories.hbs",{
+                username:req.session.username,
                 stories: docs
             })
-        },(err)=>{
-            console.log("Error: " + err)
         })
     }
 })
@@ -64,8 +61,6 @@ router.post("/post_story_form",urlencoder,(req,res)=>{
     })
     story.save().then((doc)=>{
         res.redirect("/story/view_stories")
-    },(err)=>{
-        console.log("Error: " + err)
     })
 })
 
@@ -79,8 +74,6 @@ router.get("/edit_story/:id", (req,res)=>{
                 username:req.session.username,
                 story:doc
             })
-        },(err)=>{
-            console.log("Error: " + err)
         })
     }
 })
@@ -97,8 +90,6 @@ router.post("/edit_story/edit_story_form",urlencoder, (req,res)=>{
             body:body
         }).then((doc)=>{
             res.redirect("/user/userprofile")
-        },(err)=>{
-            console.log("Error: " + err)
         })
 })
 
@@ -117,8 +108,6 @@ router.get("/read_story/:id",(req,res)=>{
             res.render("read_story.hbs",{
                 story:doc
             })
-        },(err)=>{
-            console.log("Error: " + err)
         })
     }
 })
@@ -151,8 +140,6 @@ router.post("/read_story/post_story_comment",urlencoder,(req,res)=>{
             }
         }).then((doc)=>{
             res.redirect("/story/read_story/" + id)
-        },(err)=>{
-            console.log("Error: " + err)
         })
 })
 
