@@ -33,6 +33,8 @@ router.get("/", (req,res)=>{
             },(err)=>{
                 console.log("error")
             })
+        },(err)=>{
+            console.log("error")
         })
     }
     else{
@@ -45,6 +47,8 @@ router.get("/", (req,res)=>{
             },(err)=>{
                 console.log("error")
             })
+        },(err)=>{
+            console.log("error")
         })
     }
 })
