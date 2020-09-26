@@ -24,6 +24,8 @@ router.get("/view_prompts",(req,res)=>{
                 username:req.session.username,
                 prompts: docs
             })
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
     else{
@@ -32,6 +34,8 @@ router.get("/view_prompts",(req,res)=>{
                 username:req.session.username,
                 prompts: docs
             })
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
 })
@@ -47,6 +51,7 @@ router.get("/post_prompt", (req,res)=>{
     }
 })
 
+
 router.post("/post_prompt_form",urlencoder,(req,res)=>{
     let prompt_title = req.body.prompt
     let genre = req.body.prompt_genre
@@ -56,9 +61,13 @@ router.post("/post_prompt_form",urlencoder,(req,res)=>{
         author: req.session.username,
         genre: genre,
         likes: 0
+    },(err)=>{
+        console.log("Error: " + err)
     })
     prompt.save().then((doc)=>{
         res.redirect("/prompt/view_prompts")
+    },(err)=>{
+        console.log("Error: " + err)
     })
 })
 
@@ -72,6 +81,8 @@ router.get("/edit_prompt/:id", (req,res)=>{
                 username:req.session.username,
                 prompt:doc
             })
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
 })
@@ -86,6 +97,8 @@ router.post("/edit_prompt/edit_prompt_form", urlencoder,(req,res)=>{
             genre:genre
         }).then((doc)=>{
             res.redirect("/user/userprofile")
+        },(err)=>{
+            console.log("Error: " + err)
         })
 })
 
@@ -98,6 +111,8 @@ router.get("/read_prompt/:id",(req,res)=>{
                 prompt:doc
         })
         
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
     else{
@@ -105,6 +120,8 @@ router.get("/read_prompt/:id",(req,res)=>{
             res.render("read_prompt.hbs",{
                 prompt:doc
             })
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
 })
@@ -137,6 +154,8 @@ router.post("/read_prompt/post_prompt_comment",urlencoder,(req,res)=>{
             }
         }).then((doc)=>{
             res.redirect("/prompt/read_prompt/" + id)
+        },(err)=>{
+            console.log("Error: " + err)
         })
 })
 

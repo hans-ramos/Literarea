@@ -99,6 +99,8 @@ router.post("/login_form",urlencoder, (req,res)=>{
                 error:"Incorrect username or password"
             })
         }
+    },(err)=>{
+        console.log("Error: " + err)
     })
 })
 
@@ -127,8 +129,14 @@ router.get("/userprofile", (req,res)=>{
                         prompts:prompts,
                         my_profile:user
                     })
+                },(err)=>{
+                    console.log("Error: " + err)
                 })
+            },(err)=>{
+                console.log("Error: " + err)
             })
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
 })
@@ -155,8 +163,14 @@ router.get("/get_profile/:id",(req,res)=>{
                         prompts:prompts,
                         user_profile:user
                     })
+                },(err)=>{
+                    console.log("Error: " + err)
                 })
+            },(err)=>{
+                console.log("Error: " + err)
             })
+        },(err)=>{
+            console.log("Error: " + err)
         })
     }
     else{
@@ -168,9 +182,15 @@ router.get("/get_profile/:id",(req,res)=>{
                         prompts:prompts,
                         user_profile:user
                     })
+                },(err)=>{
+                    console.log("Error: " + err)
                 })
+            },(err)=>{
+                console.log("Error: " + err)
             })
-        })
+        }),(err)=>{
+            console.log("Error: " + err)
+        }
     }
 })
 
@@ -185,6 +205,8 @@ router.get("/edit_profile", (req,res)=>{
             username:req.session.username,
             profile:doc
         })
+    },(err)=>{
+        console.log("Error: " + err)
     })
     }
 })
@@ -198,6 +220,8 @@ router.post("/edit_profile_form",urlencoder,(req,res)=>{
         intro:intro
     }).then((doc)=>{
         res.redirect("/user/userprofile");
+    },(err)=>{
+        console.log("Error: " + err)
     })
 })
 
