@@ -127,4 +127,22 @@ router.post("/delete_story", urlencoder,(req,res)=>{
     })
 })
 
+router.post("/read_story/post_story_comment",urlencoder,(req,res)=>{
+    let id =req.body.id
+    let comment = req.body.comment
+    console.log(comment)
+    console.log(id)
+    Story.findOneAndUpdate({_id:id},
+        {
+            $push: {
+                comments:{
+                    comment:comment,
+                    commenter:req.session.username
+                }
+            }
+        }).then((doc)=>{
+            res.redirect("/story/read_story/" + id)
+        })
+})
+
 module.exports = router

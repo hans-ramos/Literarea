@@ -1,5 +1,10 @@
 const mongoose = require("mongoose")
 
+// let Comment = mongoose.model("comment",{
+//     content:String,
+//     commenter:String
+// })
+
 let Story =mongoose.model("story",{
         title:String,
         date_posted:Date,
@@ -7,7 +12,10 @@ let Story =mongoose.model("story",{
         genre:String,
         body:String,
         likes:Number,
-        comments:[String]
+        comments:[{
+           comment:String,
+           commenter:String
+        }]
 })
 
 module.exports = {

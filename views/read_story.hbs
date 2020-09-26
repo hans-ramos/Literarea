@@ -81,34 +81,33 @@
                     <div class="col">
                         <div class="commentsDiv">
                             <h5>Comments:</h5>
-                            {{#unless username}}
-                            <form> <!-- post comment -->
+                            {{#if username}}
+                            <form method="post" action="post_story_comment"> <!-- post comment -->
+                                <input type="hidden" name="id" value={{story._id}}>
                                 <div class="form-group">
                                     <label for="storyComment">Post a comment:</label>
-                                    <textarea class="form-control" id="storyComment" rows="3"></textarea>
+                                    <textarea class="form-control" id="storyComment" rows="3" name="comment"></textarea>
                                 </div>
-                                    <button type="submit" class="btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
+                                    <button type="submit" class="post_comment btn btn-primary" style="background-color: #1e2022; color: white">Submit</button>
                             </form>
-                            {{/unless}}
+                            {{/if}}
                             <br>
 
                             <!-- posted comments -->
                             <table class="table table-striped" id="commentsTable">
+                                {{#each story.comments}}
                                 <tr class="username">
-                                    <td><h6>{username1}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia tenetur ipsa eveniet molestiae beatae. Quibusdam nostrum nesciunt mollitia accusamus, quis error molestiae voluptatibus nihil accusantium ipsam odit doloremque quod illo!}</td>
+                                    <td><h6>{{commenter}}</h6>{{comment}}</td>
                                 </tr>
-                                <tr class="username">
-                                    <td><h6>{username2}</h6>{Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus rerum neque dignissimos eum incidunt dolorum sit ullam. Minima, officiis corporis! Eaque est id aliquam vitae beatae iure nulla distinctio assumenda?}</td>
-                                </tr>
-                                <tr class="username">
-                                    <td><h6>{username3}</h6>{Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quibusdam? In id, cumque facilis temporibus voluptas delectus itaque quasi, officiis debitis voluptate sed eaque laborum, consectetur molestias similique iure velit.}</td>
-                                </tr>
+                                {{/each}}
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+        </script>
         <script> // for auto adjust textarea | https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
             const tx = document.getElementsByTagName('textarea');
             for (let i = 0; i < tx.length; i++) {
@@ -120,6 +119,5 @@
             this.style.height = (this.scrollHeight) + 'px';
             }
         </script>
-
     </body>
 </html>
