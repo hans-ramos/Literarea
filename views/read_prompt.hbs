@@ -72,11 +72,33 @@
         </nav>
         <div class="content">
             <div class="prompt-contents-form">
+                {{#unless username}}
                 <form>
                     <div class="form-group">
                         <label for="promptContent"><h5>{{prompt.prompt}}</h5><h6>{{prompt.author}} | {{prompt.genre}} | {{prompt.likes}} likes</h6></label>
                     </div>
                 </form>
+                {{/unless}}
+                {{#if username}}
+                {{#unless liked}}
+                <form method="post" action="like_prompt">
+                    <div class="form-group">
+                        <label for="promptContent"><h5>{{prompt.prompt}}</h5><h6>{{prompt.author}} | {{prompt.genre}} | {{prompt.likes}} likes</h6></label>
+                        <input type="hidden" name="prompt_id" value="{{prompt._id}}">
+                        <button  type="submit" class="btn btn-primary float-right" id="" style="margin: 20px;background-color: #1e2022;"> Like </button>
+                    </div>
+                </form>
+                {{/unless}}
+                {{#if liked}}
+                <form method="post" action="unlike_prompt">
+                    <div class="form-group">
+                        <label for="promptContent"><h5>{{prompt.prompt}}</h5><h6>{{prompt.author}} | {{prompt.genre}} | {{prompt.likes}} likes</h6></label>
+                        <input type="hidden" name="prompt_id" value="{{prompt._id}}">
+                        <button  type="submit" class="btn btn-primary float-right" id="" style="margin: 20px;background-color: #1e2022;"> Unlike </button>
+                    </div>
+                </form>
+                {{/if}}
+                {{/if}}
             </div>
 
             <div class="container-fluid">

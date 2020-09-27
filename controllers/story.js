@@ -93,20 +93,54 @@ router.post("/edit_story/edit_story_form",urlencoder, (req,res)=>{
         })
 })
 
-router.get("/read_story/:id",(req,res)=>{
-    if (req.session.username){
-        Story.findOne({_id:req.params.id}).then((doc)=>{
-            res.render("read_story.hbs",{
-                username:req.session.username,
-                story:doc
-        })
+// router.get("/read_story/:id",(req,res)=>{
+
+//     if (req.session.username){
+//         Story.findOne({_id:req.params.id}).then((doc)=>{
+//             User.findOne({username:req.session.username, liked_content:req.body.story_id})
+//             res.render("read_story.hbs",{
+//                 username:req.session.username,
+//                 story:doc
+//         })
         
+//         })
+//     }
+//     else{
+//         Story.findOne({_id:req.params.id}).then((doc)=>{
+//             res.render("read_story.hbs",{
+//                 story:doc
+//             })
+//         })
+//     }
+// })
+
+router.get("/read_story/:id", (req,res)=>{
+    if(req.session.username){
+        Story.findOne({_id:req.params.id}).then((story)=>{
+            User.findOne({username:req.session.username, liked_content:req.params.id},function(err, result){
+                if(err){
+                    console.log("Error" +err)
+                }
+                else if (result){
+                    res.render("read_story.hbs",{
+                        story:story,
+                        username:req.session.username,
+                        liked:true
+                    })
+                }
+                else{
+                    res.render("read_story.hbs",{
+                        story:story,
+                        username:req.session.username
+                    })
+                }
+            })
         })
     }
     else{
-        Story.findOne({_id:req.params.id}).then((doc)=>{
+        Story.findOne({_id:req.params.id}).then((story)=>{
             res.render("read_story.hbs",{
-                story:doc
+                story:story
             })
         })
     }
@@ -161,6 +195,44 @@ router.post("/read_story/delete_story_comment", urlencoder,(req,res)=>{
         }, (err)=>{
             res.send(false)
             console.log("error")
+        })
+})
+
+router.post("/read_story/like_story",urlencoder,(req,res)=>{
+    let id = req.body.story_id
+    User.findOneAndUpdate({username:req.session.username},
+        {
+            $push:{
+                liked_content:id
+            }
+        }).then((user)=>{
+            Story.findOneAndUpdate({_id:id},
+                {
+                    $inc:{
+                        likes:1
+                    }
+                }).then((story)=>{
+                    res.redirect("/story/read_story/" + id)
+                })
+        })
+})
+
+router.post("/read_story/unlike_story",urlencoder,(req,res)=>{
+    let id = req.body.story_id
+    User.findOneAndUpdate({username:req.session.username},
+        {
+            $pull:{
+                liked_content:id
+            }
+        }).then((user)=>{
+            Story.findOneAndUpdate({_id:id},
+                {
+                    $inc:{
+                        likes:-1
+                    }
+                }).then((story)=>{
+                    res.redirect("/story/read_story/" + id)
+                })
         })
 })
 

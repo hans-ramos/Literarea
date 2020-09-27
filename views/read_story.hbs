@@ -71,12 +71,37 @@
         </nav>
         <div class="content">
             <div class="story-contents-form">
+                {{#unless username}}
                 <form>
                     <div class="form-group">
                         <label for="storyContent"><h5>{{story.title}}</h5><h6>{{story.author}} | {{story.genre}} | {{story.likes}} likes</h6></label>
                         <div class id="storyContent">{{story.body}}</div>
                     </div>
                 </form>
+                {{/unless}}
+                {{#if username}}
+                {{#unless liked}}
+                <form method="post" action="like_story">
+                    <div class="form-group">
+                        <label for="storyContent"><h5>{{story.title}}</h5><h6>{{story.author}} | {{story.genre}} | {{story.likes}} likes</h6></label>
+                        <input type="hidden" name="story_id" value="{{story._id}}">
+                            <button  type="submit" class="btn btn-primary float-right" id="" style="margin: 20px;background-color: #1e2022;"> Like </button>
+                        <div class id="storyContent">{{story.body}}</div>
+                    </div>
+                </form>
+                {{/unless}}
+                {{#if liked}}
+                <form method="post" action="unlike_story">
+                    <div class="form-group">
+                        <label for="storyContent"><h5>{{story.title}}</h5><h6>{{story.author}} | {{story.genre}} | {{story.likes}} likes</h6></label>
+                        <input type="hidden" name="story_id" value="{{story._id}}">
+                            <button  type="submit" class="btn btn-primary float-right" id="" style="margin: 20px;background-color: #1e2022;"> Unlike </button>
+                        <div class id="storyContent">{{story.body}}</div>
+                    </div>
+                </form>
+                {{/if}}
+                {{/if}}
+
             </div>
             
             <div class="container-fluid">

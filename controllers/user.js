@@ -140,22 +140,47 @@ router.get("/subscriptions", (req,res)=>{
         res.redirect("/login")
     }
     else{
-        res.render("subscriptions.hbs",{
-            username:req.session.username
+        User.findOne({username:req.session.username}).then((user)=>{
+            Story.find({author:user.subscriptions}).then((stories)=>{
+                Prompt.find({author:user.subscriptions}).then((prompts)=>{
+                    res.render("subscriptions.hbs",{
+                        username:req.session.username,
+                        user:user,
+                        stories:stories,
+                        prompts:prompts
+                    })
+                })
+            })
         })
     }
 })
 
-router.get("/get_profile/:id",(req,res)=>{
+router.get("/get_profile/:id", (req,res)=>{
     if (req.session.username){
         User.findOne({username:req.params.id}).then((user)=>{
             Story.find({author:req.params.id}).then((stories)=>{
                 Prompt.find({author:req.params.id}).then((prompts)=>{
-                    res.render("getprofile.hbs",{
-                        username:req.session.username,
-                        stories:stories,
-                        prompts:prompts,
-                        user_profile:user
+                    User.findOne({username:req.session.username, subscriptions:req.params.id},function(err, result){
+                        if(err){
+                            console.log("Error" + err)
+                        }
+                        else if (result){
+                            res.render("getprofile.hbs",{
+                                username:req.session.username,
+                                stories:stories,
+                                prompts:prompts,
+                                user_profile:user,
+                                subscribed:true
+                            })
+                        }
+                        else{
+                            res.render("getprofile.hbs",{
+                                username:req.session.username,
+                                stories:stories,
+                                prompts:prompts,
+                                user_profile:user,
+                            })
+                        }
                     })
                 })
             })
@@ -175,7 +200,6 @@ router.get("/get_profile/:id",(req,res)=>{
         })
     }
 })
-
 
 router.get("/edit_profile", (req,res)=>{
     if(!req.session.username){
@@ -202,6 +226,31 @@ router.post("/edit_profile_form",urlencoder,(req,res)=>{
         res.redirect("/user/userprofile");
     })
 })
+
+router.post("/get_profile/follow_author",urlencoder,(req,res)=>{
+    let author = req.body.author
+    User.findOneAndUpdate({username:req.session.username},
+        {
+            $push:{
+                subscriptions:author
+            }
+        }).then((doc)=>{
+            res.redirect("/user/get_profile/" + author)
+        })
+})
+
+router.post("/get_profile/unfollow_author",urlencoder,(req,res)=>{
+    let author = req.body.author
+    User.findOneAndUpdate({username:req.session.username},
+        {
+            $pull:{
+                subscriptions:author
+            }
+        }).then((doc)=>{
+            res.redirect("/user/get_profile/" + author)
+        })
+})
+
 
 router.get("/signout",(req,res)=>{
     req.session.destroy()

@@ -77,7 +77,20 @@
                         <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Intro:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{user_profile.intro}} </span></li>
 
                         <li class="list-group-item"><span class="info-label" style="color: #black;"><strong>Bio:</strong>&nbsp;</span><span id="" class="float-right info-field"> {{user_profile.bio}} </span></li>
-                        <button data-id="{{_id}}" class="btn btn-primary" id="" type="button" style="margin: 20px;background-color: #1e2022;"> Follow Author </button>
+                        {{#if username}}
+                        {{#unless subscribed}}
+                        <form method="post" action="follow_author">
+                            <input type="hidden" name="author" value="{{user_profile.username}}">
+                            <button type="submit" class="btn btn-primary" id="" style="margin: 20px;background-color: #1e2022;"> Follow Author </button>
+                        </form>
+                        {{/unless}}
+                        {{#if subscribed}}
+                         <form method="post" action="unfollow_author">
+                            <input type="hidden" name="author" value="{{user_profile.username}}">
+                            <button type="submit" class="btn btn-primary" id="" style="margin: 20px;background-color: #1e2022;"> Unfollow Author </button>
+                        </form>
+                        {{/if}}
+                        {{/if}}
                     </ul>
                 </div>
             </div>

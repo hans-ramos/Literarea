@@ -90,20 +90,52 @@ router.post("/edit_prompt/edit_prompt_form", urlencoder,(req,res)=>{
 })
 
 
-router.get("/read_prompt/:id",(req,res)=>{
-    if (req.session.username){
-        Prompt.findOne({_id:req.params.id}).then((doc)=>{
-            res.render("read_prompt.hbs",{
-                username:req.session.username,
-                prompt:doc
-        })
+// router.get("/read_prompt/:id",(req,res)=>{
+//     if (req.session.username){
+//         Prompt.findOne({_id:req.params.id}).then((doc)=>{
+//             res.render("read_prompt.hbs",{
+//                 username:req.session.username,
+//                 prompt:doc
+//         })
         
+//         })
+//     }
+//     else{
+//         Prompt.findOne({_id:req.params.id}).then((doc)=>{
+//             res.render("read_prompt.hbs",{
+//                 prompt:doc
+//             })
+//         })
+//     }
+// })
+
+router.get("/read_prompt/:id", (req,res)=>{
+    if(req.session.username){
+        Prompt.findOne({_id:req.params.id}).then((prompt)=>{
+            User.findOne({username:req.session.username, liked_content:req.params.id},function(err, result){
+                if(err){
+                    console.log("Error" +err)
+                }
+                else if (result){
+                    res.render("read_prompt.hbs",{
+                        prompt:prompt,
+                        username:req.session.username,
+                        liked:true
+                    })
+                }
+                else{
+                    res.render("read_prompt.hbs",{
+                        prompt:prompt,
+                        username:req.session.username
+                    })
+                }
+            })
         })
     }
     else{
-        Prompt.findOne({_id:req.params.id}).then((doc)=>{
+        Prompt.findOne({_id:req.params.id}).then((prompt)=>{
             res.render("read_prompt.hbs",{
-                prompt:doc
+                prompt:prompt
             })
         })
     }
@@ -158,6 +190,44 @@ router.post("/read_prompt/delete_prompt_comment", urlencoder,(req,res)=>{
         }, (err)=>{
             res.send(false)
             console.log("error")
+        })
+})
+
+router.post("/read_prompt/like_prompt",urlencoder,(req,res)=>{
+    let id = req.body.prompt_id
+    User.findOneAndUpdate({username:req.session.username},
+        {
+            $push:{
+                liked_content:id
+            }
+        }).then((user)=>{
+            Prompt.findOneAndUpdate({_id:id},
+                {
+                    $inc:{
+                        likes:1
+                    }
+                }).then((prompt)=>{
+                    res.redirect("/prompt/read_prompt/" + id)
+                })
+        })
+})
+
+router.post("/read_prompt/unlike_prompt",urlencoder,(req,res)=>{
+    let id = req.body.prompt_id
+    User.findOneAndUpdate({username:req.session.username},
+        {
+            $pull:{
+                liked_content:id
+            }
+        }).then((user)=>{
+            Prompt.findOneAndUpdate({_id:id},
+                {
+                    $inc:{
+                        likes:-1
+                    }
+                }).then((prompt)=>{
+                    res.redirect("/prompt/read_prompt/" + id)
+                })
         })
 })
 
