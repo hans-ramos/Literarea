@@ -5,10 +5,8 @@ let User = mongoose.model("user",{
         email: String,
         intro: String,
         bio: String,
-        stories: Array,
-        prompts: Array,
-        comments: Array,
-        subscriptions: [Array]
+        subscriptions: [String],
+        liked_content:[String]
 })
 module.exports={
         User
