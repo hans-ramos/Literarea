@@ -140,5 +140,25 @@ router.post("/read_prompt/post_prompt_comment",urlencoder,(req,res)=>{
         })
 })
 
+router.post("/read_prompt/delete_prompt_comment", urlencoder,(req,res)=>{
+    let prompt_id = req.body.prompt_id
+    let comment_id = req.body.comment_id
+    Prompt.findOneAndUpdate({_id:prompt_id},
+        {
+            $pull: {
+                comments:{_id:comment_id}
+            }
+        }).then((doc)=>{
+            if(doc){
+                res.send(true)
+                
+            }else{
+                res.send(false)
+            }
+        }, (err)=>{
+            res.send(false)
+            console.log("error")
+        })
+})
 
 module.exports = router

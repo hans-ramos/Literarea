@@ -143,4 +143,25 @@ router.post("/read_story/post_story_comment",urlencoder,(req,res)=>{
         })
 })
 
+router.post("/read_story/delete_story_comment", urlencoder,(req,res)=>{
+    let story_id = req.body.story_id
+    let comment_id = req.body.comment_id
+    Story.findOneAndUpdate({_id:story_id},
+        {
+            $pull: {
+                comments:{_id:comment_id}
+            }
+        }).then((doc)=>{
+            if(doc){
+                res.send(true)
+                
+            }else{
+                res.send(false)
+            }
+        }, (err)=>{
+            res.send(false)
+            console.log("error")
+        })
+})
+
 module.exports = router

@@ -86,7 +86,7 @@
                             <h5>Comments</h5>
                             {{#if username}}
                             <form method="post" action="post_prompt_comment"> <!-- post comment -->
-                                <input type="hidden" name="id" value={{prompt._id}}>
+                                <input type="hidden" name="id" value={{prompt._id}} class="prompt_id">
                                 <div class="form-group">
                                     <label for="storyComment">Post a comment:</label>
                                     <textarea class="form-control" id="promptComment" rows="3" name="comment"></textarea>
@@ -99,8 +99,12 @@
                             <!-- posted comments -->
                             <table class="table table-striped" id="commentsTable">
                                 {{#each prompt.comments}}
-                                <tr class="username">
-                                    <td><h6>{{commenter}}</h6>{{comment}}</td>
+                                <tr data-id="{{_id}}">
+                                    <td><h6>{{commenter}}</h6>{{comment}}
+                                    {{#check_commenter ../username commenter}}
+                                        <button class="delete_prompt_comment btn btn-primary float-right" style="background-color: #1e2022; color: white" data-id="{{../_id}}">Delete Comment</button>
+                                    {{/check_commenter}}
+                                    </td>
                                 </tr>
                                 {{/each}}
                             </table>
@@ -109,6 +113,8 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+        </script>
         <script> // for auto adjust textarea | https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
             const tx = document.getElementsByTagName('textarea');
             for (let i = 0; i < tx.length; i++) {
@@ -119,6 +125,28 @@
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
             }
+        </script>
+        <script>
+             $(document).ready(function(){
+                $("button.delete_prompt_comment").click(function(){
+                    let prompt_id=$("input.prompt_id").val()
+                    let comment_id=$(this).attr("data-id")
+                    $.ajax({
+                        url:"delete_prompt_comment",
+                        method:"post",
+                        data:{
+                            prompt_id,
+                            comment_id
+                        },
+                        success: function(c){
+                            if(c){
+                                console.log("Deleted")
+                                $("tr[data-id="+comment_id+"]").remove()
+                            }
+                        }
+                    })
+                })
+            })
         </script>
 
     </body>

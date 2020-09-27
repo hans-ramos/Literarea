@@ -16,7 +16,6 @@ const urlencoder = bodyparser.urlencoded({
     extended:false
 })
 
-
 router.use("/user", require("./user"))
 router.use("/story", require("./story"))
 router.use("/prompt", require("./prompt"))

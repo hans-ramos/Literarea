@@ -12,6 +12,12 @@ mongoose.connect("mongodb+srv://admin:p@ssword@cluster0.jd2cr.mongodb.net/Litera
   useUnifiedTopology: true
 })
 
+hbs.registerHelper("check_commenter",(username, comment, options)=>{
+  if (username == comment)
+    return options.fn(this)
+})
+
+
 app.set("view engine", "hbs")
 app.use(express.static(__dirname + "/public"))
 

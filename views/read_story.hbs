@@ -86,7 +86,7 @@
                             <h5>Comments:</h5>
                             {{#if username}}
                             <form method="post" action="post_story_comment"> <!-- post comment -->
-                                <input type="hidden" name="id" value={{story._id}}>
+                                <input type="hidden" name="id" value={{story._id}} class="story_id">
                                 <div class="form-group">
                                     <label for="storyComment">Post a comment:</label>
                                     <textarea class="form-control" id="storyComment" rows="3" name="comment"></textarea>
@@ -99,8 +99,12 @@
                             <!-- posted comments -->
                             <table class="table table-striped" id="commentsTable">
                                 {{#each story.comments}}
-                                <tr class="username">
-                                    <td><h6>{{commenter}}</h6>{{comment}}</td>
+                                <tr data-id="{{_id}}">
+                                    <td><h6>{{commenter}}</h6>{{comment}}
+                                    {{#check_commenter ../username commenter}}
+                                        <button class="delete_story_comment btn btn-primary float-right" style="background-color: #1e2022; color: white" data-id="{{../_id}}">Delete Comment</button>
+                                    {{/check_commenter}}
+                                    </td>
                                 </tr>
                                 {{/each}}
                             </table>
@@ -121,6 +125,28 @@
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
             }
+        </script>
+        <script>
+             $(document).ready(function(){
+                $("button.delete_story_comment").click(function(){
+                    let story_id=$("input.story_id").val()
+                    let comment_id=$(this).attr("data-id")
+                    $.ajax({
+                        url:"delete_story_comment",
+                        method:"post",
+                        data:{
+                            story_id,
+                            comment_id
+                        },
+                        success: function(c){
+                            if(c){
+                                console.log("Deleted")
+                                $("tr[data-id="+comment_id+"]").remove()
+                            }
+                        }
+                    })
+                })
+            })
         </script>
     </body>
 </html>
