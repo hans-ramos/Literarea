@@ -1,7 +1,6 @@
 const express = require("express")
 const session = require("express-session")
 const bodyparser = require("body-parser")
-const cookieparser = require("cookie-parser")
 const e = require("express")
 const { handlebars } = require("hbs")
 const hbs = ("hbs")
