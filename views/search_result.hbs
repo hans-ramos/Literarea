@@ -1,24 +1,24 @@
 <html>
 	<head>
     <!-- Javascript files -->
-    {{!-- <script src="../assets/js/scripts.js"></script>
-    <script type="text/javascript" src="assets/js/validator.min.js"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js">
-        </script>
+    <script src="assets/js/scripts.js"></script>
+    <script type="text/javascript" src="assets/js/validator.min.js"></script>
 
     <!-- Bootstrap CSS & Font Links-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
-    <link rel="stylesheet" href="/../css/Header-Dark.css">
-    <link rel="stylesheet" href="/../css/Navigation-Clean.css">
-    <link rel="stylesheet" href="/../css/styles.css">
+    <link rel="stylesheet" href="../css/Header-Dark.css">
+    <link rel="stylesheet" href="../css/Navigation-Clean.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="icon" href="../img/llogo.png">
 
     <!-- Other CSS Files -->
@@ -27,15 +27,14 @@
     <link rel="stylesheet" type="text/css" href="../css/error.css">
 	</head>
 	<body>
-
 		<main>
             <nav class="navbar navbar-light navbar-expand-lg d-lg-flex justify-content-lg-end align-items-lg-start navigation-clean" style="background-color: #1e2022;padding: 5px 5px 5px 5px;min-width: 300px;">
                 <div class="container-fluid">
-                    <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../img/llogo.png">
+                    <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                     <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
                     <form class="form-inline m-0 p-2" method="post" action="search">
                         <input class="form-control m-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                        <button class="btn btn-primary m-2 bg-light text-dark" type="submit">Search</button>
+                        <button class="btn btn-primary btn-xs m-2 bg-light text-dark" type="submit">Search</button>
                     </form>
                     <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                         <ul class="nav navbar-nav ml-auto">
@@ -72,37 +71,59 @@
                     </div>
                 </div>
             </nav>
-			<title> About Us </title>
-
-			<div  style="">
-                <div class="p-2" id="aboutusDIv" style="float: left; width: 50%; height: 100%;">
-                    <div>
-                        <h2 class="contentTitle"> Project Description </h2>
-                        <hr class="hr1">
-                            <ul class="ulContent">
-                                <li>Literarea is a free to use online story sharing website where you can post and share your own stories or add your personal take to one of our prompts. Subscribe to your favorite authors so you can be notified whenever they post new content. Join now!</li>
-                            </ul>
+            <title> Search Results </title>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <h1>Authors</h1> 
+                        <ul>
+                            {{#each users}}
+                            <li>
+                                <a href="/user/get_profile/{{username}}">{{username}}</a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        <h1>Stories</h1>
+                        <table class="table table-hover">
+                            <thead class="thead" style="background-color: #1e2022; color: white;">
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Genre</th>
+                                    <th scope="col">Likes</th>
+                                    <th scope="col">Author</th>
+                                </tr>
+                            </thead>
+                            {{#each stories}}
+                            <tr>
+                                <td><a href="/story/read_story/{{_id}}">{{title}}</a></td>
+                                <td>{{genre}}</td>
+                                <td>{{likes}}</td>
+                                <td><a href="/user/get_profile/{{author}}">{{author}}</td> 
+                            </tr>
+                            {{/each}}
+                        </table>
+                        <h1>Prompts</h1>
+                        <table class="table table-hover">
+                            <thead class="thead" style="background-color: #1e2022; color: white;">
+                                <tr>
+                                    <th scope="col">Prompt</th>
+                                    <th scope="col">Genre</th>
+                                    <th scope="col">Likes</th>
+                                    <th scope="col">Author</th>
+                                </tr>
+                            </thead>
+                            {{#each prompts}}
+                            <tr>
+                                <td><a href="/story/read_prompt/{{_id}}">{{prompt}}</a></td>
+                                <td>{{genre}}</td>
+                                <td>{{likes}}</td>
+                                <td><a href="/user/get_profile/{{author}}">{{author}}</td> 
+                            </tr>
+                            {{/each}}
+                        </table>
                     </div>
                 </div>
-                
-                <div class="p-2" id="Packages" style="float: right; width: 50%; height: 100%;">
-                    <div>
-                        <h2 class="contentTitle"> Project Packages </h2>
-                        <hr class="hr1">
-                            <ul class="ulContent">
-                                <li>Body-Parser</li>
-                                <li>Bootstrap</li>
-                                <li>Cookie-Parser</li>
-                                <li>Crypto-JS</li>
-                                <li>Express</li>
-                                <li>Express-Session</li>
-                                <li>HBS</li>
-                                <li>Mongoose</li>
-                                <li>Nodemon</li>
-                            </ul>
-                    </div>
-                </div>
-			</div>
+            </div> 
 		</main>		  
 	</body>
 </html>

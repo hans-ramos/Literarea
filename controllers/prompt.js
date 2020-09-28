@@ -11,6 +11,9 @@ const app = express()
 const {User} = require("../models/user")
 const {Prompt} = require("../models/prompt")
 
+var set_genre = "All"
+var set_sort = "Recent"
+
 const urlencoder = bodyparser.urlencoded({
     extended:false
 })
@@ -89,25 +92,6 @@ router.post("/edit_prompt/edit_prompt_form", urlencoder,(req,res)=>{
         })
 })
 
-
-// router.get("/read_prompt/:id",(req,res)=>{
-//     if (req.session.username){
-//         Prompt.findOne({_id:req.params.id}).then((doc)=>{
-//             res.render("read_prompt.hbs",{
-//                 username:req.session.username,
-//                 prompt:doc
-//         })
-        
-//         })
-//     }
-//     else{
-//         Prompt.findOne({_id:req.params.id}).then((doc)=>{
-//             res.render("read_prompt.hbs",{
-//                 prompt:doc
-//             })
-//         })
-//     }
-// })
 
 router.get("/read_prompt/:id", (req,res)=>{
     if(req.session.username){
@@ -230,5 +214,115 @@ router.post("/read_prompt/unlike_prompt",urlencoder,(req,res)=>{
                 })
         })
 })
+
+
+router.get("/sort-by-recent",(req,res,)=>{
+    set_sort = "Recent"
+    sort(req, res)
+})
+
+router.get("/sort-by-liked",(req,res,)=>{
+    set_sort = "Most-Liked"
+    sort(req, res)
+})
+
+router.get("/sort-by-all",(req,res,)=>{
+    set_genre = "All"
+    sort(req, res)
+})
+
+router.get("/sort-by-adventure",(req,res,)=>{
+    set_genre = "Adventure"
+    sort(req, res)
+})
+
+router.get("/sort-by-horror",(req,res,)=>{
+    set_genre = "Horror"
+    sort(req, res)
+})
+
+router.get("/sort-by-mystery",(req,res,)=>{
+    set_genre = "Mystery"
+    sort(req, res)
+})
+
+function sort (req,res){
+    if (req.session.username){
+        if (set_genre != "All"){
+            if (set_sort == "Most-Liked"){
+                Prompt.find({genre: set_genre}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Prompt.find({genre: set_genre}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+        }
+        else{
+            if (set_sort == "Most-Liked"){
+                Prompt.find({}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Prompt.find({}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }      
+        }
+    }
+    else{
+        if (set_genre != "All"){
+            if (set_sort == "Most-Liked"){
+                Prompt.find({genre: set_genre}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Prompt.find({genre: set_genre}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+        }
+        else{
+            if (set_sort == "Most-Liked"){
+                Prompt.find({}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Prompt.find({}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_prompts.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }      
+        }
+    }
+}
 
 module.exports = router

@@ -11,6 +11,9 @@ const app = express()
 const {User} = require("../models/user")
 const {Story} = require("../models/story")
 
+var set_genre = "All"
+var set_sort = "Recent"
+
 const urlencoder = bodyparser.urlencoded({
     extended:false
 })
@@ -92,27 +95,6 @@ router.post("/edit_story/edit_story_form",urlencoder, (req,res)=>{
             res.redirect("/user/userprofile")
         })
 })
-
-// router.get("/read_story/:id",(req,res)=>{
-
-//     if (req.session.username){
-//         Story.findOne({_id:req.params.id}).then((doc)=>{
-//             User.findOne({username:req.session.username, liked_content:req.body.story_id})
-//             res.render("read_story.hbs",{
-//                 username:req.session.username,
-//                 story:doc
-//         })
-        
-//         })
-//     }
-//     else{
-//         Story.findOne({_id:req.params.id}).then((doc)=>{
-//             res.render("read_story.hbs",{
-//                 story:doc
-//             })
-//         })
-//     }
-// })
 
 router.get("/read_story/:id", (req,res)=>{
     if(req.session.username){
@@ -235,5 +217,115 @@ router.post("/read_story/unlike_story",urlencoder,(req,res)=>{
                 })
         })
 })
+
+
+router.get("/sort-by-recent",(req,res,)=>{
+    set_sort = "Recent"
+    sort(req, res)
+})
+
+router.get("/sort-by-liked",(req,res,)=>{
+    set_sort = "Most-Liked"
+    sort(req, res)
+})
+
+router.get("/sort-by-all",(req,res,)=>{
+    set_genre = "All"
+    sort(req, res)
+})
+
+router.get("/sort-by-adventure",(req,res,)=>{
+    set_genre = "Adventure"
+    sort(req, res)
+})
+
+router.get("/sort-by-horror",(req,res,)=>{
+    set_genre = "Horror"
+    sort(req, res)
+})
+
+router.get("/sort-by-mystery",(req,res,)=>{
+    set_genre = "Mystery"
+    sort(req, res)
+})
+
+function sort (req,res){
+    if (req.session.username){
+        if (set_genre != "All"){
+            if (set_sort == "Most-Liked"){
+                Story.find({genre: set_genre}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Story.find({genre: set_genre}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+        }
+        else{
+            if (set_sort == "Most-Liked"){
+                Story.find({}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Story.find({}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }      
+        }
+    }
+    else{
+        if (set_genre != "All"){
+            if (set_sort == "Most-Liked"){
+                Story.find({genre: set_genre}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Story.find({genre: set_genre}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+        }
+        else{
+            if (set_sort == "Most-Liked"){
+                Story.find({}).sort({likes: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }
+            else{
+                Story.find({}).sort({date_posted: -1}).then((docs)=>{
+                    res.render("view_stories.hbs",{
+                        username:req.session.username,
+                        stories: docs
+                    })
+                })
+            }      
+        }
+    }
+}
 
 module.exports = router

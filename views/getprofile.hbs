@@ -30,6 +30,10 @@
             <div class="container-fluid">
                 <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                 <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
+                <form class="form-inline m-0 p-2" method="post" action="../../user/search">
+                        <input class="form-control m-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <button class="btn btn-primary m-2 bg-light text-dark" type="submit">Search</button>
+                </form>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
                         {{#if username}}

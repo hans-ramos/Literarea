@@ -2,6 +2,7 @@
 <html>
 	<head>
     <!-- Bootstrap CSS & Font Links-->
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
@@ -30,6 +31,10 @@
             <div class="container-fluid">
                 <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                 <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
+                <form class="form-inline m-0 p-2" method="post" action="search">
+                        <input class="form-control m-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <button class="btn btn-primary btn-xs m-2 bg-light text-dark" type="submit">Search</button>
+                </form>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
                         {{#if username}}

@@ -251,6 +251,37 @@ router.post("/get_profile/unfollow_author",urlencoder,(req,res)=>{
         })
 })
 
+router.post("/search",urlencoder,(req,res)=>{
+    let search = req.body.search
+    if (req.session.username){
+        User.find({username:search}).then((users)=>{
+            Prompt.find({prompt:search}).then((prompts)=>{
+                Story.find({title:search}).then((stories)=>{
+                    res.render("search_result.hbs",{
+                        username:req.session.username,
+                        users,
+                        prompts,
+                        stories
+                    })
+                })
+            })
+        })
+    }
+    else{
+        User.find({username:search}).then((users)=>{
+            Prompt.find({prompt:search}).then((prompts)=>{
+                Story.find({title:search}).then((stories)=>{
+                    res.render("search_result.hbs",{
+                        users,
+                        prompts,
+                        stories
+                    })
+                })
+            })
+        })
+    }
+})
+
 
 router.get("/signout",(req,res)=>{
     req.session.destroy()

@@ -33,6 +33,10 @@
             <div class="container-fluid">
                 <a href="/"><img style="width: 70px;height: 70px;margin: 0px;" src="../../img/llogo.png">
                 <a class="navbar-brand" href="/" style="margin: 0px 0px 0px 10px;color: rgb(255,255,255);font-size: 30px;">Literarea</a></a>
+                <form class="form-inline m-0 p-2" method="post" action="../../user/search">
+                        <input class="form-control m-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <button class="btn btn-primary m-2 bg-light text-dark" type="submit">Search</button>
+                </form>
                 <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
                     <ul class="nav navbar-nav ml-auto">
                         {{#if username}}
@@ -72,20 +76,20 @@
 
         <!-- Sort By Buttons | https://getbootstrap.com/docs/4.0/components/buttons/ | at "checkbox and radio buttons" part -->
         <div>
-            <div class="row px-4 py-2">
+            <div class="row px-4 py-3">
+                <form method="get" action="/story/sort-by-recent"><button type="submit" class="btn btn-secondary">Recent</button></form> &nbsp;
+                <form method="get" action="/story/sort-by-liked"><button type="submit" class="btn btn-secondary">Most Liked</button></form> &nbsp;
+
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-secondary" href="#">Recent</button>
-                    <button type="button" class="btn btn-secondary" href="#">Most Viewed</button>
-                    <button type="button" class="btn btn-secondary" href="#">Most Liked</button>
                     <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Genre
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">Adventure</a>
-                        <a class="dropdown-item" href="#">Mystery</a>
-                        <a class="dropdown-item" href="#">Horror</a>
-                        <a class="dropdown-item" href="#">etc.</a>
+                        <a class="dropdown-item" href="#"><form method="get" action="/story/sort-by-all"><button type="submit" class="dropdown-item">All</button></form></a>
+                        <a class="dropdown-item" href="#"><form method="get" action="/story/sort-by-adventure"><button type="submit" class="dropdown-item">Adventure</button></form></a>
+                        <a class="dropdown-item" href="#"><form method="get" action="/story/sort-by-horror"><button type="submit" class="dropdown-item">Horror</button></form></a>
+                        <a class="dropdown-item" href="#"><form method="get" action="/story/sort-by-mystery"><button type="submit" class="dropdown-item">Mystery</button></form></a>
                     </div>
                     </div>
                 </div>
