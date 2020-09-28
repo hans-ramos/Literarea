@@ -93,6 +93,7 @@
                                     <th scope="col">Genre</th>
                                     <th scope="col">Likes</th>
                                     <th scope="col">Author</th>
+                                    <th scope="col">Date Posted</th>
                                 </tr>
                             </thead>
                             {{#each stories}}
@@ -100,7 +101,8 @@
                                 <td><a href="/story/read_story/{{_id}}">{{title}}</a></td>
                                 <td>{{genre}}</td>
                                 <td>{{likes}}</td>
-                                <td><a href="/user/get_profile/{{author}}">{{author}}</td> 
+                                <td><a href="/user/get_profile/{{author}}">{{author}}</td>
+                                <td>{{dateFormat date_posted "dddd, MMMM Do YYYY, h:mm:ss a"}}</td> 
                             </tr>
                             {{/each}}
                         </table>
@@ -112,6 +114,7 @@
                                     <th scope="col">Genre</th>
                                     <th scope="col">Likes</th>
                                     <th scope="col">Author</th>
+                                    <th scope="col">Date Posted</th>
                                 </tr>
                             </thead>
                             {{#each prompts}}
@@ -119,7 +122,8 @@
                                 <td><a href="/story/read_prompt/{{_id}}">{{prompt}}</a></td>
                                 <td>{{genre}}</td>
                                 <td>{{likes}}</td>
-                                <td><a href="/user/get_profile/{{author}}">{{author}}</td> 
+                                <td><a href="/user/get_profile/{{author}}">{{author}}</td>
+                                <td>{{dateFormat date_posted "dddd, MMMM Do YYYY, h:mm:ss a"}}</td> 
                             </tr>
                             {{/each}}
                         </table>

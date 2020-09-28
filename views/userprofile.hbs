@@ -120,7 +120,7 @@
                                         <td><a href="/story/read_story/{{_id}}">{{title}}</a></td>
                                         <td>{{genre}}</td>
                                         <td>{{likes}}</td>
-                                        <td>{{date_posted}}</td>
+                                        <td>{{dateFormat date_posted "dddd, MMMM Do YYYY, h:mm:ss a"}}</td>
                                         <td>
                                             <form method="get" action="/story/edit_story/{{_id}}">
                                                 <div>
@@ -155,7 +155,7 @@
                                         <td><a href="/prompt/read_prompt/{{_id}}">{{prompt}}</a></td>
                                         <td>{{genre}}</td>
                                         <td>{{likes}}</td>
-                                        <td>{{date_posted}}</td>
+                                        <td>{{dateFormat date_posted "dddd, MMMM Do YYYY, h:mm:ss a"}}</td>
                                         <td>
                                             <form method="get" action="/prompt/edit_prompt/{{_id}}">
                                                 <div>

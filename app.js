@@ -17,6 +17,8 @@ hbs.registerHelper("check_commenter",(username, comment, options)=>{
     return options.fn(this)
 })
 
+hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 
 app.set("view engine", "hbs")
 app.use(express.static(__dirname + "/public"))
